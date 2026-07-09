@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A New Skyline - Fun Reading Adventure! 🏙️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            padding: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "🏙️";
+            position: absolute;
+            font-size: 150px;
+            opacity: 0.2;
+            top: -20px;
+            left: 20px;
+        }
+
+        .header::after {
+            content: "🏗️";
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.2;
+            bottom: -20px;
+            right: 20px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 1.4em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .level-badge {
+            display: inline-block;
+            background: #fff;
+            color: #ff6b6b;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 1.2em;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .fun-intro {
+            background: #e8f5e9;
+            padding: 30px 40px;
+            border-bottom: 4px solid #81c784;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .fun-intro h2 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .toc {
+            background: #fff3e0;
+            padding: 30px 40px;
+            border-bottom: 4px solid #ffb74d;
+        }
+
+        .toc h2 {
+            color: #f57c00;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .toc ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .toc li {
+            padding: 15px 20px;
+            background: white;
+            border-radius: 15px;
+            border-left: 5px solid #ff9800;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .toc li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .toc a {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        .section {
+            padding: 40px;
+            border-bottom: 3px solid #e0e0e0;
+        }
+
+        .section-title {
+            font-size: 2.2em;
+            color: #6a1b9a;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #ab47bc;
+            display: inline-block;
+        }
+
+        .annotated-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin-bottom: 30px;
+        }
+
+        .original-text {
+            padding: 30px;
+            background: #f3e5f5;
+            border-right: 4px solid #9c27b0;
+            line-height: 2;
+            font-size: 1.1em;
+        }
+
+        .original-text p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .annotations {
+            padding: 30px;
+            background: #fffde7;
+        }
+
+        .annotation {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            border-left: 5px solid #ffeb3b;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .annotation-title {
+            font-weight: bold;
+            color: #f57f17;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .annotation-content {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.8;
+        }
+
+        .vocab-word {
+            background: #fff176;
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #f57f17;
+            display: inline-block;
+        }
+
+        .fun-fact {
+            background: #e1f5fe;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #03a9f4;
+            margin: 10px 0;
+        }
+
+        .fun-fact::before {
+            content: "💡 ";
+            font-size: 1.3em;
+        }
+
+        .word-power {
+            background: #f3e5f5;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #9c27b0;
+            margin: 10px 0;
+        }
+
+        .word-power::before {
+            content: "⚡ ";
+            font-size: 1.3em;
+        }
+
+        .sentence-fun {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #4caf50;
+            margin: 10px 0;
+        }
+
+        .sentence-fun::before {
+            content: "✨ ";
+            font-size: 1.3em;
+        }
+
+        .key-vocab {
+            background: #e3f2fd;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 40px;
+        }
+
+        .key-vocab h3 {
+            color: #1565c0;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .vocab-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .vocab-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #2196f3;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .vocab-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .vocab-item .word {
+            font-weight: bold;
+            color: #1565c0;
+            font-size: 1.3em;
+            margin-bottom: 8px;
+        }
+
+        .vocab-item .pos {
+            color: #999;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+
+        .vocab-item .definition {
+            color: #666;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .vocab-item .example {
+            color: #888;
+            margin-top: 8px;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 3px solid #ddd;
+        }
+
+        .quiz-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 50px 40px;
+        }
+
+        .quiz-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #c2185b;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .quiz-item {
+            background: white;
+            color: #333;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+        }
+
+        .quiz-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .quiz-question {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #c2185b;
+            display: flex;
+            align-items: start;
+            gap: 10px;
+        }
+
+        .quiz-question::before {
+            content: "🤔";
+            font-size: 1.5em;
+        }
+
+        .quiz-options {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .quiz-options li {
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: #f5f5f5;
+            border-radius: 12px;
+            border-left: 5px solid #ff4081;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.05em;
+        }
+
+        .quiz-options li:hover {
+            background: #ffe0ec;
+            transform: translateX(10px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .quiz-answer {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #c8e6c9;
+            border-radius: 12px;
+            color: #2e7d32;
+            border-left: 5px solid #4caf50;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .quiz-answer::before {
+            content: "✅ ";
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .writing-challenge {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 30px;
+        }
+
+        .writing-challenge h3 {
+            color: #00695c;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .writing-challenge .challenge-text {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 968px) {
+            .annotated-content {
+                grid-template-columns: 1fr;
+            }
+
+            .original-text {
+                border-right: none;
+                border-bottom: 4px solid #9c27b0;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏙️ A New Skyline 🏗️</h1>
+            <div class="subtitle">An Amazing Story About New York City!</div>
+            <div class="level-badge">⭐ Level W ⭐</div>
+            <p style="margin-top: 20px; font-style: italic; position: relative; z-index: 1;">Written by Susan Lennox</p>
+        </div>
+
+        <div class="fun-intro">
+            <h2>🌟 Welcome to Our Reading Adventure!</h2>
+            <p>Get ready to explore the amazing story of New York City's skyline! You'll discover how this incredible city grew from a small town to a place filled with super-tall buildings that touch the clouds! ☁️</p>
+            <p style="margin-top: 15px;">As you read, you'll learn <strong>awesome new words</strong>, <strong>cool facts</strong>, and <strong>exciting stories</strong> about the buildings that make New York famous!</p>
+        </div>
+
+        <div class="toc">
+            <h2>📚 What's Inside</h2>
+            <ul>
+                <li><a href="#intro">🗼 Introduction - What's a Skyline?</a></li>
+                <li><a href="#growing">🌱 Growing the Big Apple</a></li>
+                <li><a href="#empire">👑 Building an Empire</a></li>
+                <li><a href="#twins">🏢 Twin Giants Rise, Then Fall</a></li>
+                <li><a href="#newtower">🕊️ A New Tower Rises from the Ashes</a></li>
+                <li><a href="#quiz">🎯 Fun Quiz Time!</a></li>
+            </ul>
+        </div>
+
+        <div class="key-vocab">
+            <h3>🎒 Your Word Backpack</h3>
+            <p style="text-align: center; margin-bottom: 20px; color: #666;">These are the special words you'll meet in our story! Keep them in your "word backpack" as you read!</p>
+            <div class="vocab-list">
+                <div class="vocab-item">
+                    <div class="word">architects</div>
+                    <div class="pos">noun</div>
+                    <div class="definition">People who design buildings - like building artists!</div>
+                    <div class="example">"The architects drew amazing plans for the new tower."</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="word">behemoth</div>
+                    <div class="pos">noun</div>
+                    <div class="definition">Something HUGE and powerful - like a giant!</div>
+                    <div class="example">"The Empire State Building was a real behemoth!"</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="word">complex</div>
+                    <div class="pos">noun</div>
+                    <div class="definition">A group of buildings working together - like a team!</div>
+                    <div class="example">"The World Trade Center was a complex of many buildings."</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="word">dwarfed</div>
+                    <div class="pos">verb</div>
+                    <div class="definition">Made something look tiny - like a giant next to a mouse!</div>
+                    <div class="example">"The tall towers dwarfed the small houses nearby."</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="word">iconic</div>
+                    <div class="pos">adjective</div>
+                    <div class="definition">Super famous and recognizable - a true symbol!</div>
+                    <div class="example">"The Eiffel Tower is an iconic symbol of Paris."</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="word">innovations</div>
+                    <div class="pos">noun</div>
+                    <div class="definition">Cool new ideas or inventions - game changers!</div>
+                    <div class="example">"New innovations made buildings much taller."</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="word">landmark</div>
+                    <div class="pos">noun</div>
+                    <div class="definition">An important building or place everyone knows!</div>
+                    <div class="example">"The Statue of Liberty is a famous landmark."</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="word">panoramic</div>
+                    <div class="pos">adjective</div>
+                    <div class="definition">Seeing everything all around - a 360° view!</div>
+                    <div class="example">"From the top, we had a panoramic view of the city."</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="word">perimeter</div>
+                    <div class="pos">noun</div>
+                    <div class="definition">The outside edge of something - the border!</div>
+                    <div class="example">"The columns went around the perimeter of the building."</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="word">prominent</div>
+                    <div class="pos">adjective</div>
+                    <div class="definition">Easy to see and important - stands out!</div>
+                    <div class="example">"The tall building was the most prominent in the skyline."</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="word">skeleton</div>
+                    <div class="pos">noun</div>
+                    <div class="definition">The framework that holds a building up - like bones!</div>
+                    <div class="example">"Steel beams formed the building's skeleton."</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="word">vertically</div>
+                    <div class="pos">adverb</div>
+                    <div class="definition">Straight up and down - like a rocket!</div>
+                    <div class="example">"The elevators moved vertically through the building."</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Introduction -->
+        <div class="section" id="intro">
+            <h2 class="section-title">🗼 Introduction - What's a Skyline?</h2>
+            <div class="annotated-content">
+                <div class="original-text">
+                    <p>What would Paris be without the Eiffel Tower, or London without its famous clock tower, Big Ben? <span class="vocab-word">Iconic</span> structures such as these, along with surrounding buildings, create an outline against the sky, called a <span class="vocab-word">skyline</span>. Skylines are unique identifiers of places, just as your fingerprints are one-of-a-kind identifiers of you. Unlike fingerprints, however, skylines don't stay the same forever. They grow and change, sometimes gradually and at other times quite suddenly.</p>
+
+                    <p>New York City is a great example of a place whose skyline has experienced both slow and rapid change. In recent years, New York's skyline has been altered dramatically. Buildings and structures have risen, fallen, and risen again. New York's skyline has continuously evolved.</p>
+                </div>
+                <div class="annotations">
+                    <div class="annotation">
+                        <div class="annotation-title">🎯 Word Power: Iconic</div>
+                        <div class="annotation-content">
+                            <strong>Iconic</strong> means something is SUPER famous and everyone recognizes it! Think of the golden arches of McDonald's or the Apple logo - those are iconic! 🌟<br><br>
+                            <div class="fun-fact">The Eiffel Tower and Big Ben are like celebrities of buildings - everyone knows them!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">✨ Sentence Magic</div>
+                        <div class="annotation-content">
+                            <strong>"What would... be without..."</strong><br>
+                            This is a special question that doesn't need an answer! It's called a <em>rhetorical question</em>. The writer uses it to show how IMPORTANT something is.<br><br>
+                            <div class="sentence-fun">Try it yourself: "What would ice cream be without chocolate?" You don't need to answer - you're just showing that chocolate makes ice cream awesome!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">💡 Cool Comparison</div>
+                        <div class="annotation-content">
+                            The writer compares skylines to <strong>fingerprints</strong>! 🖐️<br><br>
+                            Just like your fingerprints are unique to YOU, a city's skyline is unique to THAT CITY! But here's the twist: fingerprints stay the same, but skylines KEEP CHANGING!<br><br>
+                            <div class="fun-fact">This comparison helps us understand that every city is special, just like every person!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">⚡ Word Friends</div>
+                        <div class="annotation-content">
+                            <strong>Gradually</strong> = slowly, little by little (like watching grass grow 🌱)<br>
+                            <strong>Suddenly</strong> = quickly, all at once (like a lightning bolt ⚡)<br><br>
+                            These two words are <em>opposites</em>! The writer uses them to show that skylines can change in BOTH ways!
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">🎪 Fun Fact Time!</div>
+                        <div class="annotation-content">
+                            <strong>Big Ben</strong> is actually the name of the BELL inside the clock tower, not the tower itself! The tower is called Elizabeth Tower! 🔔<br><br>
+                            The Eiffel Tower was built in 1889 for a world fair. Many people didn't like it at first and thought it was ugly! Now everyone loves it! 😍
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Growing the Big Apple -->
+        <div class="section" id="growing">
+            <h2 class="section-title">🌱 Growing the Big Apple</h2>
+            <div class="annotated-content">
+                <div class="original-text">
+                    <p>During the nineteenth century, New York City's famous skyline, along with its diverse population, began to grow rapidly. With the end of the Civil War came freed slaves from the South in search of work. Later, waves of Europeans <span class="vocab-word">immigrated</span> to the United States through the port of New York. Many of them stayed on New York's Manhattan Island. By the late 1800s, New York was the most densely populated city in the country; by 1925, it was the most densely populated city in the world.</p>
+
+                    <p>All the city's new residents needed places to live, work, and shop. <span class="vocab-word">Gradually</span>, the city expanded northward as more stores, factories, and homes were built. However, Manhattan Island is only about 23 square miles (59.6 sq km) in area. There was no more room for the city to expand outward; the only place to grow was up.</p>
+
+                    <p>To do that, new building methods had to be employed. Up until that time, walls had been used to support a building's weight. The walls on a building's ground floor had to be strong enough to bear the weight of all the floors and the roof above them. This type of construction limited a building's height. There was no practical way to make walls thick and strong enough to support a building with dozens of floors.</p>
+
+                    <p>A new way of building involved using a steel frame instead of walls to support the structure. Gigantic steel beams were connected to form the building's <span class="vocab-word">skeleton</span>. Then the walls were hung from the beams, much like curtains from a rod, and attached at the bottom to the floor. With the use of steel frame construction, the walls of the building's upper floors were not weighing heavily on the lower floors' walls. The weight of the walls was distributed along the steel beams holding them up.</p>
+
+                    <p>Steel frame construction made it possible for buildings to reach new heights. By the turn of the twentieth century, New York City housed a number of huge structures that came to be called <span class="vocab-word">skyscrapers</span>. Soon skyscrapers were going up one after another as builders and <span class="vocab-word">architects</span> competed to make the world's tallest building.</p>
+                </div>
+                <div class="annotations">
+                    <div class="annotation">
+                        <div class="annotation-title">🎯 Word Power: Immigrated</div>
+                        <div class="annotation-content">
+                            <strong>Immigrated</strong> means to MOVE to a new country to live there! 🏠<br><br>
+                            <div class="fun-fact">Imagine if you moved from your city to live in a completely different country - that's immigrating!</div>
+                            <strong>Remember:</strong> IMMIGRATE = IN to a country (like walking INto a room)<br>
+                            EMIGRATE = EXIT from a country (like EXITing a room)
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">🍎 Fun Fact: The Big Apple!</div>
+                        <div class="annotation-content">
+                            Why is New York called "The Big Apple"? 🍎<br><br>
+                            Back in the 1920s, a writer heard African-American stable hands in New Orleans call the New York racetracks "the big apple." He started calling New York City "the Big Apple" in his newspaper column! The name stuck, and now everyone uses it!<br><br>
+                            <div class="fun-fact">There's even a "Big Apple Corner" in New York where two streets are painted to look like a giant red apple!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">⚡ Word Power: Skeleton</div>
+                        <div class="annotation-content">
+                            A <strong>skeleton</strong> in a building is just like YOUR skeleton! 🦴<br><br>
+                            Your bones hold your body up. A building's skeleton (made of steel beams) holds the BUILDING up!<br><br>
+                            <div class="sentence-fun">Without a skeleton, you'd be a puddle on the floor! Without a building skeleton, it would be a puddle of bricks!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">✨ Cool Comparison</div>
+                        <div class="annotation-content">
+                            The writer says walls were hung "much like <strong>curtains from a rod</strong>" 🪟<br><br>
+                            This helps us PICTURE it! Just like curtains hang from a rod and don't hold up the ceiling, the walls in these new buildings hang from the steel frame and don't hold up the building!<br><br>
+                            <div class="fun-fact">This clever comparison is called a SIMILE - comparing two things using "like" or "as"!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">🏢 Word Detective: Skyscraper</div>
+                        <div class="annotation-content">
+                            Let's break down this cool word! 🔍<br><br>
+                            <strong>Sky</strong> + <strong>scraper</strong> = Skyscraper!<br><br>
+                            A "scraper" is something that scrapes or rubs against something. So a skyscraper is a building that "scrapes the sky"! ☁️<br><br>
+                            <div class="sentence-fun">What a fun way to describe a really, really tall building!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">💡 Problem & Solution</div>
+                        <div class="annotation-content">
+                            <strong>The Problem:</strong> Manhattan Island is only 23 square miles - that's about the size of 15,000 football fields! With all the new people, there was NO ROOM to build outward! 😱<br><br>
+                            <strong>The Solution:</strong> Build UP instead of out! 🏗️<br><br>
+                            <div class="fun-fact">23 square miles is tiny for a huge city! Imagine trying to fit everyone you know in just 23 square miles!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Building an Empire -->
+        <div class="section" id="empire">
+            <h2 class="section-title">👑 Building an Empire</h2>
+            <div class="annotated-content">
+                <div class="original-text">
+                    <p>By the late 1920s, New York City's skyline had risen to new heights. It was during this time that two of the city's best-known structures were built.</p>
+
+                    <p>In 1928, the builder of the seventy-seven-story Chrysler Building wanted to make it the world's tallest. So fierce was the competition for this title that the Chrysler builder <span class="vocab-word">smuggled</span> a tall spire onto the top of his structure. The secret plan worked: in 1930, the Chrysler Building became not only the world's tallest structure but also the only one to stand taller than 1,000 feet (305 m).</p>
+
+                    <p>The Chrysler Building's reign would not last. Just blocks away, a steel-framed <span class="vocab-word">behemoth</span> was rising. Not only would the Empire State Building take the crown for world's tallest, but it would also come to define the city it called home.</p>
+
+                    <p>Workers broke ground on the Empire State Building in January 1930. Amazingly, it was completed just 410 days later. The steel and granite building had 103 floors and stood over 1,400 feet (427 m) tall. More than 3,000 workers contributed skills and labor to finish the building.</p>
+
+                    <p>The completed building had 64 working elevators that took less than one minute to get to the 80th floor. An <span class="vocab-word">outside</span> observation deck on the 86th floor and an inside deck on the 102nd floor provided <span class="vocab-word">panoramic</span> views of the city.</p>
+
+                    <p>The Empire State Building symbolized New York City. It was named one of the Seven Wonders of the Modern World and was featured in many books and movies. It wore the crown of world's tallest building for nearly forty years until <span class="vocab-word">deposed</span> by twin giants rising in the lower part of Manhattan.</p>
+                </div>
+                <div class="annotations">
+                    <div class="annotation">
+                        <div class="annotation-title">🎯 Word Power: Behemoth</div>
+                        <div class="annotation-content">
+                            A <strong>behemoth</strong> is something MASSIVE - like a giant! 🦣<br><br>
+                            The Empire State Building was a real behemoth - 103 stories tall!<br><br>
+                            <div class="fun-fact">Imagine stacking 103 of your classrooms on top of each other! That's how tall the Empire State Building is!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">✨ Word Power: Smuggled</div>
+                        <div class="annotation-content">
+                            <strong>Smuggled</strong> means to secretly bring something somewhere! 🤫<br><br>
+                            The Chrysler builder snuck a tall spire to the top of his building in a SECRET PLAN! It was like a surprise party for the skyline!<br><br>
+                            <div class="sentence-fun">The writer makes this sound like a sneaky adventure story - because it WAS one!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">👑 Royal Language</div>
+                        <div class="annotation-content">
+                            Notice how the writer uses ROYAL words! 👑<br><br>
+                            <strong>"Take the crown"</strong> = become the winner/champion<br>
+                            <strong>"Wore the crown"</strong> = was the champion<br>
+                            <strong>"Deposed"</strong> = removed from the throne<br><br>
+                            <div class="fun-fact">The writer is comparing the buildings to kings and queens fighting for the throne! It makes the story more exciting!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">💡 Wow Numbers!</div>
+                        <div class="annotation-content">
+                            Let's think about these amazing numbers! 🤯<br><br>
+                            <strong>410 days</strong> to build 103 floors!<br>
+                            That's about <strong>4 floors every 5 days</strong>!<br><br>
+                            <strong>3,000 workers</strong> helped build it!<br>
+                            That's like your whole school, plus 10 more schools!<br><br>
+                            <div class="fun-fact">Workers added 4½ stories EVERY WEEK! If you watched from the street, you'd see the building grow taller every few days!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">🎬 Word Power: Panoramic</div>
+                        <div class="annotation-content">
+                            <strong>Panoramic</strong> means seeing EVERYTHING all around you - a complete 360° view! 🌅<br><br>
+                            From the 86th floor observation deck, you could see the ENTIRE city in every direction!<br><br>
+                            <div class="sentence-fun">It's like when you're on a mountain top and can see forever in every direction! That's panoramic!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">🏰 Fun Fact: Seven Wonders!</div>
+                        <div class="annotation-content">
+                            The Empire State Building was named one of the <strong>Seven Wonders of the Modern World</strong>! 🌟<br><br>
+                            Long ago, people made a list of the seven most amazing things in the world. The Empire State Building was so awesome, it got its own list for modern times!<br><br>
+                            <div class="fun-fact">It's also been in over 100 movies! The most famous is "King Kong" where a giant ape climbs to the top!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Twin Giants Rise, Then Fall -->
+        <div class="section" id="twins">
+            <h2 class="section-title">🏢 Twin Giants Rise, Then Fall</h2>
+            <div class="annotated-content">
+                <div class="original-text">
+                    <p>After the Empire State Building was completed, skyscraper construction slowed down. Mammoth structures were costly to build, and the American economy was struggling. It was not until 1970 that the city's skyline would grow even higher.</p>
+
+                    <p>In the 1960s, city officials considered building a "world trade center"—a hub for international commerce—in Lower Manhattan. The Port Authority of New York and New Jersey was in charge of the project. Architect Minoru Yamasaki designed the buildings. He proposed twin towers as part of the multibuilding <span class="vocab-word">complex</span> of offices and storefronts. The 110-story towers would include some structural <span class="vocab-word">innovations</span>.</p>
+
+                    <p>One <span class="vocab-word">innovation</span> was the use of tube-frame construction instead of steel-frame construction. Each tower was similar to a hollow square pipe. The outside <span class="vocab-word">perimeter</span> of the building had columns that were spaced close together. Surrounding the edge of the building with main support columns created more usable floor space inside.</p>
+
+                    <p>Another innovation was the use of sky lobbies. The taller a building is, the more elevators it needs. Yamasaki proposed an elevator system modeled after the city's subway system. The towers had both <span class="vocab-word">express</span> and <span class="vocab-word">local</span> elevators.</p>
+
+                    <p>People could take an express elevator to a sky lobby on the forty-fourth floor that would bypass the first forty-three floors. Then they would transfer to a local elevator, which would stop at every floor, to get to their office on the forty-eighth floor. This system was a new, efficient way to transport people <span class="vocab-word">vertically</span>, and it reduced the number of elevator shafts needed.</p>
+
+                    <p>Construction of the towers began in 1966. The North Tower was completed in December 1970, topping out at 1,727 feet (526 m) at the top of its spire. A restaurant called Windows on the World offered diners a breathtaking view from the top of the North Tower. The South Tower, reaching 1,362 feet (415 m) in height, was finished seven months later. Beneath both buildings was a parking garage that could accommodate up to two thousand vehicles. Railroad and subway stations were situated underneath the parking garage.</p>
+
+                    <p>The Twin Towers were a striking addition to the city's skyline. Because they were built away from the city's other tall skyscrapers, they <span class="vocab-word">dwarfed</span> the surrounding buildings and were the most <span class="vocab-word">prominent</span> structures on Manhattan Island. For thirty years, the World Trade Center towers were the tallest buildings in New York. Then disaster struck.</p>
+
+                    <p>On the morning of September 11, 2001, hijackers flew two passenger jets into the towers. Within an hour after the attack, the South Tower began to fall in on itself and crumble to the ground. The North Tower followed thirty minutes later. New Yorkers watched in stunned disbelief as these enormous structures were reduced to heaps of burning rubble. Nearly three thousand people died as a result of the attack.</p>
+                </div>
+                <div class="annotations">
+                    <div class="annotation">
+                        <div class="annotation-title">🎯 Word Power: Complex</div>
+                        <div class="annotation-content">
+                            A <strong>complex</strong> is a GROUP of buildings that work together - like a team! 🏢🏢🏢<br><br>
+                            The World Trade Center wasn't just one building - it was a whole collection of buildings, shops, and stations all working together!<br><br>
+                            <div class="fun-fact">Think of it like a shopping mall with many stores - it's a complex of shops!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">⚡ Word Power: Innovation</div>
+                        <div class="annotation-content">
+                            An <strong>innovation</strong> is a COOL NEW IDEA or invention that changes how things are done! 💡<br><br>
+                            The Twin Towers had special new ideas (innovations) in how they were built!<br><br>
+                            <div class="sentence-fun">Like when someone invents a new way to do homework with an app - that's an innovation!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">💡 Smart Elevator System!</div>
+                        <div class="annotation-content">
+                            The elevator system was SUPER CLEVER! 🚀<br><br>
+                            <strong>Express elevator</strong> = Fast elevator that skips floors (like an express train!)<br>
+                            <strong>Local elevator</strong> = Slow elevator that stops at every floor (like a local bus!)<br>
+                            <strong>Sky lobby</strong> = A special floor where you switch elevators<br><br>
+                            <div class="fun-fact">It's just like the subway! Express trains skip stops, local trains stop everywhere, and you transfer at certain stations!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">✨ Sentence Magic</div>
+                        <div class="annotation-content">
+                            <strong>"The taller a building is, the more elevators it needs."</strong><br><br>
+                            This is a special pattern: <em>"The [comparative]..., the [comparative]..."</em><br><br>
+                            It means: AS one thing increases, ANOTHER thing increases too!<br><br>
+                            <div class="sentence-fun">More examples:<br>
+                            "The harder you study, the smarter you get!" 📚<br>
+                            "The more you practice, the better you become!" ⭐</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">🎯 Word Power: Dwarfed</div>
+                        <div class="annotation-content">
+                            <strong>Dwarfed</strong> means to make something look TINY! 🐜<br><br>
+                            The Twin Towers were so HUGE that all the buildings around them looked like little toys!<br><br>
+                            <div class="fun-fact">A dwarf is a very small person in fairy tales. When the towers "dwarfed" other buildings, they made them look as small as dwarfs!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">🏗️ Word Power: Perimeter</div>
+                        <div class="annotation-content">
+                            The <strong>perimeter</strong> is the OUTSIDE EDGE of something - like the border! 📐<br><br>
+                            The Twin Towers had columns all around their perimeter (outside edge) to hold them up!<br><br>
+                            <div class="sentence-fun">Think of the perimeter like the fence around your yard - it goes all the way around!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">🕊️ A Sad Day</div>
+                        <div class="annotation-content">
+                            September 11, 2001 was a very sad day in American history. 😢<br><br>
+                            Bad people (terrorists) flew planes into the Twin Towers, and they fell down. Nearly 3,000 people died.<br><br>
+                            But even in this sad story, there's hope - because New Yorkers decided to build AGAIN and not give up! That's what the next section is about!<br><br>
+                            <div class="fun-fact">Today, we remember the heroes who helped save people that day - firefighters, police officers, and regular people who were very brave.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: A New Tower Rises from the Ashes -->
+        <div class="section" id="newtower">
+            <h2 class="section-title">🕊️ A New Tower Rises from the Ashes</h2>
+            <div class="annotated-content">
+                <div class="original-text">
+                    <p>The World Trade Center tragedy devastated New York and the rest of the country. New Yorkers mourned the loss of their neighbors and their <span class="vocab-word">landmark</span>. At the same time, they vowed to rebuild at the World Trade Center site.</p>
+
+                    <p>Excavating the ruins of the old towers took time. Plans for the site took years to develop; there were many opinions on what should be done, and many designs were submitted with considerable <span class="vocab-word">controversy</span>. Finally, the Port Authority unveiled the design for the new World Trade Center complex. One area was set aside as a memorial park for those who lost their lives that day. The sites where the original buildings stood are now reflecting pools with cascading waterfalls. A memorial museum contains items from the old towers.</p>
+
+                    <p>Nearby, a new 104-story tower has been constructed. Nicknamed the Freedom Tower, the structure rises an astonishing 1,776 feet (541 m). The building's height symbolizes the year of the United States' independence. The glass-paneled tower has a twisted octagon shape, and its huge reflective surface mirrors the changes in light all around it. At the top is a spire equipped with a light beam that is visible for miles.</p>
+
+                    <p>Several other high-rises are being constructed at the site as well. By the year 2020, the new World Trade Center complex should be complete. New York's ever-changing skyline will reflect the spirit of a city that continues to adapt and grow.</p>
+                </div>
+                <div class="annotations">
+                    <div class="annotation">
+                        <div class="annotation-title">🎯 Word Power: Landmark</div>
+                        <div class="annotation-content">
+                            A <strong>landmark</strong> is an IMPORTANT building or place that everyone knows and remembers! 🗽<br><br>
+                            The Twin Towers were a landmark - a special place that meant something to people.<br><br>
+                            <div class="fun-fact">Landmarks are like signposts for a city - they help you know where you are!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">🕊️ Rising from the Ashes</div>
+                        <div class="annotation-content">
+                            "Rising from the ashes" is a BEAUTIFUL expression! 🔥➡️🌟<br><br>
+                            It means to come back STRONGER after something terrible happens.<br><br>
+                            <div class="fun-fact">It comes from an old story about a phoenix - a magical bird that burns up but then comes back to life from the ashes! New York City was like the phoenix - it rose again!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">💡 The Magic Number 1,776</div>
+                        <div class="annotation-content">
+                            The new tower is <strong>1,776 feet</strong> tall - but WHY that number? 🤔<br><br>
+                            Because <strong>1776</strong> is the year America became independent! 🇺🇸<br><br>
+                            The building's height is a SECRET MESSAGE to remind us of freedom!<br><br>
+                            <div class="fun-fact">That's why it's called the "Freedom Tower" - the whole building celebrates American freedom!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">✨ Remembering with Beauty</div>
+                        <div class="annotation-content">
+                            Instead of just rebuilding buildings, New Yorkers created something BEAUTIFUL to remember the people who died: 🌊<br><br>
+                            <strong>Reflecting pools</strong> - Giant pools of water where the towers used to be<br>
+                            <strong>Cascading waterfalls</strong> - Water falling down, like tears<br>
+                            <strong>Memorial museum</strong> - A place to remember and learn<br><br>
+                            <div class="fun-fact">The waterfalls are the LARGEST human-made waterfalls in the United States! They're beautiful and sad at the same time.</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">🎨 Cool Word: Symbolize</div>
+                        <div class="annotation-content">
+                            <strong>Symbolize</strong> means to REPRESENT something else! 🎭<br><br>
+                            The height of 1,776 feet SYMBOLIZES the year 1776.<br>
+                            A heart SYMBOLIZES love. ❤️<br>
+                            A dove SYMBOLIZES peace. 🕊️<br><br>
+                            <div class="sentence-fun">The new tower symbolizes that even after terrible things, we can rebuild and be strong!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">⚡ Word Detective: Octagon</div>
+                        <div class="annotation-content">
+                            Let's break down this cool math word! 🔍<br><br>
+                            <strong>Oct-</strong> means EIGHT (like an octopus has EIGHT legs!) 🐙<br>
+                            <strong>-gon</strong> means SHAPE or ANGLE<br><br>
+                            So an <strong>octagon</strong> is a shape with EIGHT sides!<br><br>
+                            <div class="fun-fact">The new tower is shaped like a twisted octagon - that's 8 sides that twist as they go up! It's like a giant crystal!</div>
+                        </div>
+                    </div>
+
+                    <div class="annotation">
+                        <div class="annotation-title">🌟 The Big Message</div>
+                        <div class="annotation-content">
+                            The last sentence tells us the MOST IMPORTANT idea of the whole book!<br><br>
+                            <em>"New York's ever-changing skyline will reflect the spirit of a city that continues to adapt and grow."</em><br><br>
+                            This means: New York City is like a living thing that keeps CHANGE and GROWING, no matter what happens! 💪<br><br>
+                            <div class="fun-fact">Just like you! You keep learning, growing, and adapting every day!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-section" id="quiz">
+            <h2>🎯 Fun Quiz Time!</h2>
+
+            <div class="quiz-item">
+                <div class="quiz-question">What is a skyline?</div>
+                <ul class="quiz-options">
+                    <li>A. A type of cloud that looks like buildings</li>
+                    <li>B. The outline of buildings against the sky</li>
+                    <li>C. A weather pattern in big cities</li>
+                    <li>D. A special kind of painting</li>
+                </ul>
+                <div class="quiz-answer">
+                    <strong>B is correct!</strong><br>
+                    A skyline is the outline made by buildings and structures against the sky - like a city's fingerprint! 🏙️
+                </div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question">Why did New York City have to grow UP instead of OUT?</div>
+                <ul class="quiz-options">
+                    <li>A. People liked tall buildings better</li>
+                    <li>B. The government made a rule</li>
+                    <li>C. Manhattan Island was too small - only 23 square miles!</li>
+                    <li>D. It was cheaper to build up</li>
+                </ul>
+                <div class="quiz-answer">
+                    <strong>C is correct!</strong><br>
+                    Manhattan Island is only 23 square miles - that's tiny! With so many people, there was no room to spread out, so they had to build UP! 🏗️
+                </div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question">What invention made skyscrapers possible?</div>
+                <ul class="quiz-options">
+                    <li>A. Thicker walls</li>
+                    <li>B. Steel frame construction - like a building skeleton!</li>
+                    <li>Better elevators</li>
+                    <li>Stronger glass</li>
+                </ul>
+                <div class="quiz-answer">
+                    <strong>B is correct!</strong><br>
+                    Steel frame construction created a building's "skeleton" that held up the building, not the walls! This made super-tall buildings possible! 🦴
+                </div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question">How did the Chrysler Building become the world's tallest?</div>
+                <ul class="quiz-options">
+                    <li>A. It was built with extra floors from the start</li>
+                    <li>B. The builder secretly added a tall spire on top!</li>
+                    <li>C. They made the other buildings shorter</li>
+                    <li>D. They measured it differently</li>
+                </ul>
+                <div class="quiz-answer">
+                    <strong>B is correct!</strong><br>
+                    The Chrysler builder secretly smuggled a tall spire to the top - like a surprise! In 1930, it became the first building over 1,000 feet! 🤫
+                </div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question">What was special about the Twin Towers' elevator system?</div>
+                <ul class="quiz-options">
+                    <li>A. The elevators were made of glass</li>
+                    <li>B. They had sky lobbies with express and local elevators</li>
+                    <li>C. They were the fastest in the world</li>
+                    <li>D. They used solar power</li>
+                </ul>
+                <div class="quiz-answer">
+                    <strong>B is correct!</strong><br>
+                    Like the subway! Express elevators skipped floors, local elevators stopped at every floor, and you transferred at "sky lobbies"! 🚀
+                </div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question">What does "dwarfed" mean in the story?</div>
+                <ul class="quiz-options">
+                    <li>A. The towers destroyed the other buildings</li>
+                    <li>B. The towers made other buildings look tiny!</li>
+                    <li>C. The towers were the same height as other buildings</li>
+                    <li>D. The towers were painted like dwarfs</li>
+                </ul>
+                <div class="quiz-answer">
+                    <strong>B is correct!</strong><br>
+                    "Dwarfed" means to make something look super small by comparison! The Twin Towers were so HUGE that nearby buildings looked like toys! 🏢 vs 🏠
+                </div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question">Why is One World Trade Center exactly 1,776 feet tall?</div>
+                <ul class="quiz-options">
+                    <li>A. That was the tallest they could build</li>
+                    <li>B. It symbolizes 1776 - the year America became independent!</li>
+                    <li>C. It was a random number</li>
+                    <li>D. It matches the original towers</li>
+                </ul>
+                <div class="quiz-answer">
+                    <strong>B is correct!</strong><br>
+                    The height is a secret message! 1,776 feet represents 1776 - the year the United States declared independence! 🇺🇸
+                </div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question">What does "iconic" mean?</div>
+                <ul class="quiz-options">
+                    <li>A. Very old and dusty</li>
+                    <li>B. Super famous and everyone recognizes it!</li>
+                    <li>C. Very expensive</li>
+                    <li>D. Colorful and bright</li>
+                </ul>
+                <div class="quiz-answer">
+                    <strong>B is correct!</strong><br>
+                    "Iconic" means so famous that everyone knows it - it's a symbol! Like the Eiffel Tower for Paris or the Statue of Liberty for New York! 🗽
+                </div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question">What happened on September 11, 2001?</div>
+                <ul class="quiz-options">
+                    <li>A. The towers were finished</li>
+                    <li>B. A fire destroyed the buildings</li>
+                    <li>C. Terrorists flew planes into the Twin Towers</li>
+                    <li>D. The buildings were taken down on purpose</li>
+                </ul>
+                <div class="quiz-answer">
+                    <strong>C is correct!</strong><br>
+                    On September 11, 2001, bad people (terrorists) flew planes into the Twin Towers, and they collapsed. It was a very sad day, but New Yorkers decided to rebuild and be strong! 💪
+                </div>
+            </div>
+
+            <div class="quiz-item">
+                <div class="quiz-question">What is the MAIN idea of this book?</div>
+                <ul class="quiz-options">
+                    <li>A. New York has many tall buildings</li>
+                    <li>B. The World Trade Center was destroyed</li>
+                    <li>C. New York City's skyline keeps changing and growing, no matter what!</li>
+                    <li>D. Skyscrapers are dangerous</li>
+                </ul>
+                <div class="quiz-answer">
+                    <strong>C is correct!</strong><br>
+                    The whole book is about how New York's skyline has changed - slowly and quickly, through good times and bad times - but it ALWAYS keeps evolving! That's the spirit of New York! 🌟
+                </div>
+            </div>
+
+            <div class="writing-challenge">
+                <h3>✍️ Super Writer Challenge!</h3>
+                <div class="challenge-text">
+                    <strong>Your Mission:</strong> Write a paragraph (5-8 sentences) about how New York City's skyline changed from the 1800s to today.<br><br>
+                    <strong>Rules:</strong><br>
+                    🌟 Use at least 3 words from your "Word Backpack" (architects, behemoth, complex, dwarfed, iconic, innovations, landmark, panoramic, perimeter, prominent, skeleton, vertically)<br>
+                    🌟 Make your sentences interesting and fun!<br>
+                    🌟 Tell the story in order (first, then, next, finally)<br><br>
+                    <strong>Example starter:</strong><br>
+                    "New York City's skyline has continuously evolved since the 1800s. In the 19th century..."<br><br>
+                    <strong>Remember:</strong> You're telling the amazing story of how a small city grew into a place with buildings that touch the clouds! ☁️
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle quiz answers
+        document.querySelectorAll('.quiz-options li').forEach(option => {
+            option.addEventListener('click', function() {
+                const quizItem = this.closest('.quiz-item');
+                const answer = quizItem.querySelector('.quiz-answer');
+
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    this.style.background = '#f5f5f5';
+                } else {
+                    answer.style.display = 'block';
+                    this.style.background = '#ffe0ec';
+                }
+            });
+        });
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Add fun hover effects to vocab items
+        document.querySelectorAll('.vocab-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) rotate(1deg)';
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) rotate(0)';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -106,13 +106,31 @@
         }
 
         .original-sentence {
-            font-size: 1.2em;
-            line-height: 1.8;
+            font-size: 1.3em;
+            line-height: 2;
             color: #333;
             margin-bottom: 20px;
-            padding: 15px;
+            padding: 20px;
             background: white;
             border-radius: 10px;
+        }
+
+        .subject {
+            text-decoration: underline wavy #2e7d32;
+            text-underline-offset: 4px;
+            font-weight: 600;
+        }
+
+        .verb {
+            text-decoration: underline wavy #c62828;
+            text-underline-offset: 4px;
+            font-weight: 600;
+        }
+
+        .object {
+            text-decoration: underline wavy #f57f17;
+            text-underline-offset: 4px;
+            font-weight: 600;
         }
 
         .structure-analysis {
@@ -149,24 +167,19 @@
             font-size: 0.95em;
         }
 
-        .subject {
+        .subject-tag {
             background: #c8e6c9;
             color: #2e7d32;
         }
 
-        .verb {
+        .verb-tag {
             background: #ffcdd2;
             color: #c62828;
         }
 
-        .object {
+        .object-tag {
             background: #fff9c4;
             color: #f57f17;
-        }
-
-        .modifier {
-            background: #e1bee7;
-            color: #6a1b9a;
         }
 
         .vocabulary-quiz {
@@ -262,7 +275,8 @@
         .legend-items {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
+            font-size: 1.1em;
         }
 
         .legend-item {
@@ -271,10 +285,23 @@
             gap: 10px;
         }
 
-        .legend-color {
-            width: 30px;
-            height: 30px;
-            border-radius: 5px;
+        .legend-example {
+            font-weight: bold;
+        }
+
+        .green-underline {
+            text-decoration: underline wavy #2e7d32;
+            text-underline-offset: 4px;
+        }
+
+        .red-underline {
+            text-decoration: underline wavy #c62828;
+            text-underline-offset: 4px;
+        }
+
+        .orange-underline {
+            text-decoration: underline wavy #f57f17;
+            text-underline-offset: 4px;
         }
 
         @media (max-width: 768px) {
@@ -309,23 +336,19 @@
 
         <div class="section">
             <div class="legend">
-                <h3>Color Guide</h3>
+                <h3>Underline Guide - Find the Sentence Core!</h3>
                 <div class="legend-items">
                     <div class="legend-item">
-                        <div class="legend-color" style="background: #c8e6c9;"></div>
-                        <span>Subject (Who/What)</span>
+                        <span class="legend-example green-underline">Subject</span>
+                        <span>(Who/What)</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-color" style="background: #ffcdd2;"></div>
-                        <span>Verb (Action)</span>
+                        <span class="legend-example red-underline">Verb</span>
+                        <span>(Action)</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-color" style="background: #fff9c4;"></div>
-                        <span>Object (Receiver)</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #e1bee7;"></div>
-                        <span>Modifier (Describes)</span>
+                        <span class="legend-example orange-underline">Object</span>
+                        <span>(Receiver)</span>
                     </div>
                 </div>
             </div>
@@ -337,17 +360,17 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span class="modifier">Iconic</span> <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">structures</span> <span class="modifier">such as these</span>, <span class="modifier">along with surrounding buildings</span>, <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">create</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">an outline</span> <span class="modifier">against the sky</span>, <span class="modifier">called a skyline</span>.
+                    Iconic <span class="subject">structures</span> such as these, along with surrounding buildings, <span class="verb">create</span> <span class="object">an outline</span> against the sky, called a skyline.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>structures</strong> (subject) + <strong>create</strong> (verb) + <strong>an outline</strong> (object)</p>
+                        <p><strong>structures</strong> + <strong>create</strong> + <strong>an outline</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">structures</span>
-                            <span class="element verb">create</span>
-                            <span class="element object">an outline</span>
+                            <span class="element subject-tag">structures (S)</span>
+                            <span class="element verb-tag">create (V)</span>
+                            <span class="element object-tag">an outline (O)</span>
                         </div>
                         <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
                             Everything else just adds more information!
@@ -376,17 +399,17 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">Skylines</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">are</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">unique identifiers</span> <span class="modifier">of places</span>, <span class="modifier">just as your fingerprints are one-of-a-kind identifiers of you</span>.
+                    <span class="subject">Skylines</span> <span class="verb">are</span> <span class="object">unique identifiers</span> of places, just as your fingerprints are one-of-a-kind identifiers of you.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>Skylines</strong> (subject) + <strong>are</strong> (verb) + <strong>identifiers</strong> (object/complement)</p>
+                        <p><strong>Skylines</strong> + <strong>are</strong> + <strong>identifiers</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">Skylines</span>
-                            <span class="element verb">are</span>
-                            <span class="element object">identifiers</span>
+                            <span class="element subject-tag">Skylines (S)</span>
+                            <span class="element verb-tag">are (V)</span>
+                            <span class="element object-tag">identifiers (C)</span>
                         </div>
                     </div>
 
@@ -412,17 +435,17 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span class="modifier">Unlike fingerprints</span>, <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">skylines</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">don't stay</span> <span class="modifier">the same forever</span>.
+                    Unlike fingerprints, <span class="subject">skylines</span> <span class="verb">don't stay</span> <span class="object">the same</span> forever.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>skylines</strong> (subject) + <strong>don't stay</strong> (verb) + <strong>the same</strong> (complement)</p>
+                        <p><strong>skylines</strong> + <strong>don't stay</strong> + <strong>the same</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">skylines</span>
-                            <span class="element verb">don't stay</span>
-                            <span class="element object">the same</span>
+                            <span class="element subject-tag">skylines (S)</span>
+                            <span class="element verb-tag">don't stay (V)</span>
+                            <span class="element object-tag">the same (C)</span>
                         </div>
                     </div>
 
@@ -453,16 +476,16 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span class="modifier">During the nineteenth century</span>, <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">New York City's famous skyline</span>, <span class="modifier">along with its diverse population</span>, <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">began to grow</span> <span class="modifier">rapidly</span>.
+                    During the nineteenth century, New York City's famous <span class="subject">skyline</span>, along with its diverse population, <span class="verb">began to grow</span> rapidly.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>skyline</strong> (subject) + <strong>began to grow</strong> (verb)</p>
+                        <p><strong>skyline</strong> + <strong>began to grow</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">skyline</span>
-                            <span class="element verb">began to grow</span>
+                            <span class="element subject-tag">skyline (S)</span>
+                            <span class="element verb-tag">began to grow (V)</span>
                         </div>
                         <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
                             "along with its diverse population" is extra information!
@@ -505,16 +528,16 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">Many of them</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">stayed</span> <span class="modifier">on New York's Manhattan Island</span>.
+                    <span class="subject">Many of them</span> <span class="verb">stayed</span> on New York's Manhattan Island.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>Many of them</strong> (subject) + <strong>stayed</strong> (verb)</p>
+                        <p><strong>Many of them</strong> + <strong>stayed</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">Many of them</span>
-                            <span class="element verb">stayed</span>
+                            <span class="element subject-tag">Many of them (S)</span>
+                            <span class="element verb-tag">stayed (V)</span>
                         </div>
                     </div>
 
@@ -540,16 +563,16 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">Gigantic steel beams</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">were connected</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">to form the building's skeleton</span>.
+                    Gigantic steel <span class="subject">beams</span> <span class="verb">were connected</span> to form the building's skeleton.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>beams</strong> (subject) + <strong>were connected</strong> (verb)</p>
+                        <p><strong>beams</strong> + <strong>were connected</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">beams</span>
-                            <span class="element verb">were connected</span>
+                            <span class="element subject-tag">beams (S)</span>
+                            <span class="element verb-tag">were connected (V)</span>
                         </div>
                     </div>
 
@@ -594,16 +617,16 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">The Chrysler Building's reign</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">would not last</span>.
+                    The Chrysler Building's <span class="subject">reign</span> <span class="verb">would not last</span>.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>reign</strong> (subject) + <strong>would not last</strong> (verb)</p>
+                        <p><strong>reign</strong> + <strong>would not last</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">reign</span>
-                            <span class="element verb">would not last</span>
+                            <span class="element subject-tag">reign (S)</span>
+                            <span class="element verb-tag">would not last (V)</span>
                         </div>
                     </div>
 
@@ -629,16 +652,16 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">Workers</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">broke ground</span> <span class="modifier">on the Empire State Building</span> <span class="modifier">in January 1930</span>.
+                    <span class="subject">Workers</span> <span class="verb">broke ground</span> on the Empire State Building in January 1930.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>Workers</strong> (subject) + <strong>broke ground</strong> (verb phrase)</p>
+                        <p><strong>Workers</strong> + <strong>broke ground</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">Workers</span>
-                            <span class="element verb">broke ground</span>
+                            <span class="element subject-tag">Workers (S)</span>
+                            <span class="element verb-tag">broke ground (V)</span>
                         </div>
                     </div>
 
@@ -664,17 +687,17 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">An outside observation deck</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">provided</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">panoramic views</span> <span class="modifier">of the city</span>.
+                    An outside observation <span class="subject">deck</span> <span class="verb">provided</span> <span class="object">panoramic views</span> of the city.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>deck</strong> (subject) + <strong>provided</strong> (verb) + <strong>views</strong> (object)</p>
+                        <p><strong>deck</strong> + <strong>provided</strong> + <strong>views</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">deck</span>
-                            <span class="element verb">provided</span>
-                            <span class="element object">views</span>
+                            <span class="element subject-tag">deck (S)</span>
+                            <span class="element verb-tag">provided (V)</span>
+                            <span class="element object-tag">views (O)</span>
                         </div>
                     </div>
 
@@ -705,17 +728,17 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">The outside perimeter</span> <span class="modifier">of the building</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">had</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">columns</span> <span class="modifier">that were spaced close together</span>.
+                    The outside <span class="subject">perimeter</span> of the building <span class="verb">had</span> <span class="object">columns</span> that were spaced close together.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>perimeter</strong> (subject) + <strong>had</strong> (verb) + <strong>columns</strong> (object)</p>
+                        <p><strong>perimeter</strong> + <strong>had</strong> + <strong>columns</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">perimeter</span>
-                            <span class="element verb">had</span>
-                            <span class="element object">columns</span>
+                            <span class="element subject-tag">perimeter (S)</span>
+                            <span class="element verb-tag">had (V)</span>
+                            <span class="element object-tag">columns (O)</span>
                         </div>
                     </div>
 
@@ -741,17 +764,17 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">They</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">dwarfed</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">the surrounding buildings</span> <span class="modifier">and were the most prominent structures</span> <span class="modifier">on Manhattan Island</span>.
+                    <span class="subject">They</span> <span class="verb">dwarfed</span> <span class="object">the surrounding buildings</span> and were the most prominent structures on Manhattan Island.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>They</strong> (subject) + <strong>dwarfed</strong> (verb) + <strong>buildings</strong> (object)</p>
+                        <p><strong>They</strong> + <strong>dwarfed</strong> + <strong>buildings</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">They</span>
-                            <span class="element verb">dwarfed</span>
-                            <span class="element object">buildings</span>
+                            <span class="element subject-tag">They (S)</span>
+                            <span class="element verb-tag">dwarfed (V)</span>
+                            <span class="element object-tag">buildings (O)</span>
                         </div>
                     </div>
 
@@ -791,16 +814,16 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">New Yorkers</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">watched</span> <span class="modifier">in stunned disbelief</span> <span class="modifier">as these enormous structures were reduced to heaps of burning rubble</span>.
+                    <span class="subject">New Yorkers</span> <span class="verb">watched</span> in stunned disbelief as these enormous structures were reduced to heaps of burning rubble.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>New Yorkers</strong> (subject) + <strong>watched</strong> (verb)</p>
+                        <p><strong>New Yorkers</strong> + <strong>watched</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">New Yorkers</span>
-                            <span class="element verb">watched</span>
+                            <span class="element subject-tag">New Yorkers (S)</span>
+                            <span class="element verb-tag">watched (V)</span>
                         </div>
                     </div>
 
@@ -831,17 +854,17 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">New Yorkers</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">mourned</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">the loss</span> <span class="modifier">of their neighbors and their landmark</span>.
+                    <span class="subject">New Yorkers</span> <span class="verb">mourned</span> <span class="object">the loss</span> of their neighbors and their landmark.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>New Yorkers</strong> (subject) + <strong>mourned</strong> (verb) + <strong>the loss</strong> (object)</p>
+                        <p><strong>New Yorkers</strong> + <strong>mourned</strong> + <strong>the loss</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">New Yorkers</span>
-                            <span class="element verb">mourned</span>
-                            <span class="element object">the loss</span>
+                            <span class="element subject-tag">New Yorkers (S)</span>
+                            <span class="element verb-tag">mourned (V)</span>
+                            <span class="element object-tag">the loss (O)</span>
                         </div>
                     </div>
 
@@ -881,17 +904,17 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">The building's height</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">symbolizes</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">the year</span> <span class="modifier">of the United States' independence</span>.
+                    The building's <span class="subject">height</span> <span class="verb">symbolizes</span> <span class="object">the year</span> of the United States' independence.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>height</strong> (subject) + <strong>symbolizes</strong> (verb) + <strong>the year</strong> (object)</p>
+                        <p><strong>height</strong> + <strong>symbolizes</strong> + <strong>the year</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">height</span>
-                            <span class="element verb">symbolizes</span>
-                            <span class="element object">the year</span>
+                            <span class="element subject-tag">height (S)</span>
+                            <span class="element verb-tag">symbolizes (V)</span>
+                            <span class="element object-tag">the year (O)</span>
                         </div>
                     </div>
 
@@ -917,17 +940,17 @@
 
             <div class="sentence-block">
                 <div class="original-sentence">
-                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">New York's ever-changing skyline</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">will reflect</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">the spirit</span> <span class="modifier">of a city that continues to adapt and grow</span>.
+                    New York's ever-changing <span class="subject">skyline</span> <span class="verb">will reflect</span> <span class="object">the spirit</span> of a city that continues to adapt and grow.
                 </div>
 
                 <div class="structure-analysis">
                     <div class="sentence-core">
                         <h4>Sentence Core (主干)</h4>
-                        <p><strong>skyline</strong> (subject) + <strong>will reflect</strong> (verb) + <strong>the spirit</strong> (object)</p>
+                        <p><strong>skyline</strong> + <strong>will reflect</strong> + <strong>the spirit</strong></p>
                         <div class="core-elements">
-                            <span class="element subject">skyline</span>
-                            <span class="element verb">will reflect</span>
-                            <span class="element object">the spirit</span>
+                            <span class="element subject-tag">skyline (S)</span>
+                            <span class="element verb-tag">will reflect (V)</span>
+                            <span class="element object-tag">the spirit (O)</span>
                         </div>
                     </div>
 
@@ -985,7 +1008,7 @@
                 element.classList.add('incorrect');
                 // Also show the correct answer
                 options.forEach(opt => {
-                    if (opt.onclick && opt.onclick.toString().includes('true')) {
+                    if (opt.getAttribute('onclick').includes('true')) {
                         opt.classList.add('correct');
                     }
                 });
@@ -993,15 +1016,6 @@
 
             // Show the answer explanation
             answerReveal.style.display = 'block';
-
-            // Find and highlight the correct answer
-            if (!isCorrect) {
-                options.forEach(opt => {
-                    if (opt.getAttribute('onclick').includes('true')) {
-                        opt.classList.add('correct');
-                    }
-                });
-            }
         }
 
         // Smooth scroll for TOC links

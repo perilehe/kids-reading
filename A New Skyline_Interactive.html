@@ -63,6 +63,7 @@
             padding: 40px;
             border-right: 2px solid #e0e0e0;
             position: relative;
+            min-height: 100vh;
         }
 
         .notes-panel {
@@ -72,6 +73,7 @@
             top: 0;
             height: 100vh;
             overflow-y: auto;
+            align-self: start;
         }
 
         .section {
@@ -800,6 +802,7 @@
         let currentQuiz = null;
         let stars = JSON.parse(localStorage.getItem('stars') || '{}');
         let starCount = Object.values(stars).filter(v => v).length;
+        let attemptCount = 0;
 
         // Update star display
         function updateStarDisplay() {
@@ -819,6 +822,7 @@
             if (!quiz) return;
 
             currentQuiz = quizId;
+            attemptCount = 0;
             document.getElementById('quizQuestion').textContent = quiz.question;
             document.getElementById('quizContext').textContent = quiz.context;
             document.getElementById('quizFeedback').className = 'quiz-feedback';
@@ -844,16 +848,14 @@
             const options = document.querySelectorAll('.quiz-option');
             const feedback = document.getElementById('quizFeedback');
 
-            options.forEach((opt, idx) => {
-                opt.onclick = null;
-                if (idx === quiz.correct) {
-                    opt.classList.add('correct');
-                } else if (idx === selectedIndex && selectedIndex !== quiz.correct) {
-                    opt.classList.add('incorrect');
-                }
-            });
-
             if (selectedIndex === quiz.correct) {
+                // Correct answer
+                options.forEach((opt, idx) => {
+                    opt.onclick = null;
+                    if (idx === quiz.correct) {
+                        opt.classList.add('correct');
+                    }
+                });
                 feedback.className = 'quiz-feedback correct';
                 feedback.innerHTML = '✓ Correct! ' + quiz.explanation + '<button class="quiz-close-btn" onclick="closeQuiz()">Close</button>';
                 if (!stars[currentQuiz]) {
@@ -863,8 +865,27 @@
                     updateStarDisplay();
                 }
             } else {
-                feedback.className = 'quiz-feedback incorrect';
-                feedback.innerHTML = '✗ Try again next time! ' + quiz.explanation + '<button class="quiz-close-btn" onclick="closeQuiz()">Close</button>';
+                // Wrong answer
+                attemptCount++;
+                const selectedOption = options[selectedIndex];
+                selectedOption.classList.add('incorrect');
+                selectedOption.onclick = null;
+
+                if (attemptCount === 1) {
+                    // First wrong attempt - don't show answer
+                    feedback.className = 'quiz-feedback incorrect';
+                    feedback.innerHTML = '✗ Not quite right. Try again!';
+                } else {
+                    // Second wrong attempt - show answer
+                    options.forEach((opt, idx) => {
+                        opt.onclick = null;
+                        if (idx === quiz.correct) {
+                            opt.classList.add('correct');
+                        }
+                    });
+                    feedback.className = 'quiz-feedback incorrect';
+                    feedback.innerHTML = '✗ The correct answer is highlighted. ' + quiz.explanation + '<button class="quiz-close-btn" onclick="closeQuiz()">Close</button>';
+                }
             }
         }
 

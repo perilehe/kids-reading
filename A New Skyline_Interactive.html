@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A New Skyline - Interactive Reading Notes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .star-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ffd700;
+            color: #333;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: 1.3em;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 0;
+            position: relative;
+        }
+
+        .text-panel {
+            padding: 40px;
+            border-right: 2px solid #e0e0e0;
+            position: relative;
+        }
+
+        .notes-panel {
+            padding: 30px;
+            background: #fffef5;
+            position: relative;
+            overflow-y: auto;
+            max-height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #2a5298;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .text-content {
+            font-size: 1.1em;
+            line-height: 2;
+            color: #333;
+        }
+
+        .text-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* Underline styles for sentence structure */
+        .subject {
+            text-decoration: underline wavy #2e7d32;
+            text-underline-offset: 4px;
+        }
+
+        .verb {
+            text-decoration: underline wavy #c62828;
+            text-underline-offset: 4px;
+        }
+
+        .object {
+            text-decoration: underline wavy #f57f17;
+            text-underline-offset: 4px;
+        }
+
+        /* Star markers for vocabulary quiz */
+        .vocab-star {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-left: 2px;
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .vocab-star:hover {
+            transform: scale(1.3);
+        }
+
+        .vocab-star.earned {
+            color: #ffd700;
+        }
+
+        .vocab-star.unearned {
+            color: #ccc;
+        }
+
+        /* Notes panel styles */
+        .note-card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+            position: relative;
+            font-size: 0.95em;
+        }
+
+        .note-card::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 10px solid #667eea;
+        }
+
+        .note-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        .note-content {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .grammar-note {
+            border-left-color: #ff9800;
+        }
+
+        .grammar-note .note-title {
+            color: #ff9800;
+        }
+
+        .grammar-note::before {
+            border-right-color: #ff9800;
+        }
+
+        .vocab-note {
+            border-left-color: #4caf50;
+        }
+
+        .vocab-note .note-title {
+            color: #4caf50;
+        }
+
+        .vocab-note::before {
+            border-right-color: #4caf50;
+        }
+
+        /* Quiz popup */
+        .quiz-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 2000;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .quiz-popup.active {
+            display: block;
+        }
+
+        .quiz-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+        }
+
+        .quiz-overlay.active {
+            display: block;
+        }
+
+        .quiz-question {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .quiz-context {
+            font-style: italic;
+            color: #666;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            padding: 12px 20px;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background: #e3f2fd;
+            border-color: #2196f3;
+        }
+
+        .quiz-option.correct {
+            background: #c8e6c9;
+            border-color: #4caf50;
+            font-weight: bold;
+        }
+
+        .quiz-option.incorrect {
+            background: #ffcdd2;
+            border-color: #f44336;
+        }
+
+        .quiz-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .quiz-close:hover {
+            color: #333;
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .quiz-feedback.correct {
+            background: #c8e6c9;
+            color: #2e7d32;
+            display: block;
+        }
+
+        .quiz-feedback.incorrect {
+            background: #ffcdd2;
+            color: #c62828;
+            display: block;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .toc h2 {
+            color: #2a5298;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .toc ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .toc li {
+            padding: 8px 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .toc a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .legend {
+            background: #f3e5f5;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .legend h4 {
+            color: #6a1b9a;
+            margin-bottom: 10px;
+        }
+
+        .legend-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .notes-panel {
+                position: relative;
+                max-height: none;
+            }
+
+            .text-panel {
+                border-right: none;
+                border-bottom: 2px solid #e0e0e0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="star-counter">⭐ Stars: <span id="starCount">0</span> / <span id="totalStars">20</span></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>A New Skyline</h1>
+            <p>Interactive Reading Notes</p>
+            <div class="level-badge">Level W</div>
+        </div>
+
+        <div class="toc">
+            <h2>Contents</h2>
+            <ul>
+                <li><a href="#intro">Introduction</a></li>
+                <li><a href="#growing">Growing the Big Apple</a></li>
+                <li><a href="#empire">Building an Empire</a></li>
+                <li><a href="#twins">Twin Giants Rise, Then Fall</a></li>
+                <li><a href="#newtower">A New Tower Rises</a></li>
+            </ul>
+        </div>
+
+        <div class="legend">
+            <h4>Underline Guide:</h4>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <span class="subject">Subject</span> (Who/What)
+                </div>
+                <div class="legend-item">
+                    <span class="verb">Verb</span> (Action)
+                </div>
+                <div class="legend-item">
+                    <span class="object">Object</span> (Receiver)
+                </div>
+                <div class="legend-item">
+                    <span>⭐</span> Click for vocabulary quiz!
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="text-panel">
+                <!-- Introduction -->
+                <div class="section" id="intro">
+                    <h2 class="section-title">Introduction</h2>
+                    <div class="text-content">
+                        <p>What would Paris be without the Eiffel Tower, or London without its famous clock tower, Big Ben? <span class="subject">Iconic structures</span> such as these, along with surrounding buildings, <span class="verb">create</span> <span class="object">an outline</span> against the sky, called a skyline<span data-quiz="iconic" class="vocab-star unearned">⭐</span>. <span class="subject">Skylines</span> <span class="verb">are</span> <span class="object">unique identifiers</span> of places<span data-quiz="unique" class="vocab-star unearned">⭐</span>, just as your fingerprints are one-of-a-kind identifiers of you. <span class="subject">Skylines</span>, unlike fingerprints, <span class="verb">don't stay</span> <span class="object">the same</span> forever. They grow and change, sometimes gradually and at other times quite suddenly.</p>
+
+                        <p><span class="subject">New York City</span> <span class="verb">is</span> <span class="object">a great example</span> of a place whose skyline has experienced both slow and rapid change. In recent years, New York's skyline has been altered dramatically. Buildings and structures have risen, fallen, and risen again. New York's skyline has continuously evolved.</p>
+                    </div>
+                </div>
+
+                <!-- Growing the Big Apple -->
+                <div class="section" id="growing">
+                    <h2 class="section-title">Growing the Big Apple</h2>
+                    <div class="text-content">
+                        <p>During the nineteenth century, New York City's famous <span class="subject">skyline</span>, along with its diverse population<span data-quiz="diverse" class="vocab-star unearned">⭐</span>, <span class="verb">began to grow</span> rapidly<span data-quiz="rapidly" class="vocab-star unearned">⭐</span>. With the end of the Civil War came freed slaves from the South in search of work. Later, waves of Europeans immigrated to the United States through the port of New York<span data-quiz="immigrated" class="vocab-star unearned">⭐</span>. Many of them stayed on New York's Manhattan Island. By the late 1800s, New York was the most densely populated city in the country; by 1925, it was the most densely populated city in the world.</p>
+
+                        <p>All the city's new residents needed places to live, work, and shop. Gradually, the city expanded northward as more stores, factories, and homes were built. However, Manhattan Island is only about 23 square miles (59.6 sq km) in area. There was no more room for the city to expand outward; the only place to grow was up.</p>
+
+                        <p>To do that, new building methods had to be employed. Up until that time, walls had been used to support a building's weight. The walls on a building's ground floor had to be strong enough to bear the weight of all the floors and the roof above them. This type of construction limited a building's height. There was no practical way to make walls thick and strong enough to support a building with dozens of floors.</p>
+
+                        <p>A new way of building involved using a steel frame instead of walls to support the structure. Gigantic steel beams were connected to form the building's skeleton<span data-quiz="skeleton" class="vocab-star unearned">⭐</span>. Then the walls were hung from the beams, much like curtains from a rod, and attached at the bottom to the floor. With the use of steel frame construction, the walls of the building's upper floors were not weighing heavily on the lower floors' walls. The weight of the walls was distributed along the steel beams holding them up.</p>
+
+                        <p>Steel frame construction made it possible for buildings to reach new heights. By the turn of the twentieth century, New York City housed a number of huge structures that came to be called skyscrapers. Soon skyscrapers were going up one after another as builders and architects competed to make the world's tallest building.</p>
+                    </div>
+                </div>
+
+                <!-- Building an Empire -->
+                <div class="section" id="empire">
+                    <h2 class="section-title">Building an Empire</h2>
+                    <div class="text-content">
+                        <p>By the late 1920s, New York City's skyline had risen to new heights. It was during this time that two of the city's best-known structures were built.</p>
+
+                        <p>In 1928, the builder of the seventy-seven-story Chrysler Building wanted to make it the world's tallest. So fierce was the competition for this title that the Chrysler builder smuggled a tall spire onto the top of his structure. The secret plan worked: in 1930, the Chrysler Building became not only the world's tallest structure but also the only one to stand taller than 1,000 feet (305 m).</p>
+
+                        <p>The Chrysler Building's reign would not last<span data-quiz="reign" class="vocab-star unearned">⭐</span>. Just blocks away, a steel-framed behemoth was rising. Not only would the Empire State Building take the crown for world's tallest, but it would also come to define the city it called home.</p>
+
+                        <p>Workers broke ground on the Empire State Building in January 1930<span data-quiz="broke ground" class="vocab-star unearned">⭐</span>. Amazingly, it was completed just 410 days later. The steel and granite building had 103 floors and stood over 1,400 feet (427 m) tall. More than 3,000 workers contributed skills and labor to finish the building.</p>
+
+                        <p>The completed building had 64 working elevators that took less than one minute to get to the 80th floor. An outside observation deck on the 86th floor and an inside deck on the 102nd floor provided panoramic views of the city<span data-quiz="panoramic" class="vocab-star unearned">⭐</span>.</p>
+
+                        <p>The Empire State Building symbolized New York City. It was named one of the Seven Wonders of the Modern World and was featured in many books and movies. It wore the crown of world's tallest building for nearly forty years until deposed by twin giants rising in the lower part of Manhattan.</p>
+                    </div>
+                </div>
+
+                <!-- Twin Giants Rise, Then Fall -->
+                <div class="section" id="twins">
+                    <h2 class="section-title">Twin Giants Rise, Then Fall</h2>
+                    <div class="text-content">
+                        <p>After the Empire State Building was completed, skyscraper construction slowed down. Mammoth structures were costly to build, and the American economy was struggling. It was not until 1970 that the city's skyline would grow even higher.</p>
+
+                        <p>In the 1960s, city officials considered building a "world trade center"—a hub for international commerce—in Lower Manhattan. The Port Authority of New York and New Jersey was in charge of the project. Architect Minoru Yamasaki designed the buildings. He proposed twin towers as part of the multibuilding complex of offices and storefronts. The 110-story towers would include some structural innovations.</p>
+
+                        <p>One innovation was the use of tube-frame construction instead of steel-frame construction. Each tower was similar to a hollow square pipe. The outside perimeter of the building had columns that were spaced close together<span data-quiz="perimeter" class="vocab-star unearned">⭐</span>. Surrounding the edge of the building with main support columns created more usable floor space inside.</p>
+
+                        <p>Another innovation was the use of sky lobbies. The taller a building is, the more elevators it needs. Yamasaki proposed an elevator system modeled after the city's subway system. The towers had both express and local elevators.</p>
+
+                        <p>People could take an express elevator to a sky lobby on the forty-fourth floor that would bypass the first forty-three floors. Then they would transfer to a local elevator, which would stop at every floor, to get to their office on the forty-eighth floor. This system was a new, efficient way to transport people vertically, and it reduced the number of elevator shafts needed.</p>
+
+                        <p>Construction of the towers began in 1966. The North Tower was completed in December 1970, topping out at 1,727 feet (526 m) at the top of its spire. A restaurant called Windows on the World offered diners a breathtaking view from the top of the North Tower. The South Tower, reaching 1,362 feet (415 m) in height, was finished seven months later. Beneath both buildings was a parking garage that could accommodate up to two thousand vehicles. Railroad and subway stations were situated underneath the parking garage.</p>
+
+                        <p>The Twin Towers were a striking addition to the city's skyline. Because they were built away from the city's other tall skyscrapers, they dwarfed the surrounding buildings<span data-quiz="dwarfed" class="vocab-star unearned">⭐</span> and were the most prominent structures on Manhattan Island<span data-quiz="prominent" class="vocab-star unearned">⭐</span>. For thirty years, the World Trade Center towers were the tallest buildings in New York. Then disaster struck.</p>
+
+                        <p>On the morning of September 11, 2001, hijackers flew two passenger jets into the towers. Within an hour after the attack, the South Tower began to fall in on itself and crumble to the ground. The North Tower followed thirty minutes later. New Yorkers watched in stunned disbelief<span data-quiz="stunned" class="vocab-star unearned">⭐</span> as these enormous structures were reduced to heaps of burning rubble. Nearly three thousand people died as a result of the attack.</p>
+                    </div>
+                </div>
+
+                <!-- A New Tower Rises from the Ashes -->
+                <div class="section" id="newtower">
+                    <h2 class="section-title">A New Tower Rises from the Ashes</h2>
+                    <div class="text-content">
+                        <p>The World Trade Center tragedy devastated New York and the rest of the country. New Yorkers mourned the loss of their neighbors and their landmark<span data-quiz="landmark" class="vocab-star unearned">⭐</span>. At the same time, they vowed to rebuild at the World Trade Center site.</p>
+
+                        <p>Excavating the ruins of the old towers took time. Plans for the site took years to develop; there were many opinions on what should be done, and many designs were submitted with considerable controversy. Finally, the Port Authority unveiled the design for the new World Trade Center complex. One area was set aside as a memorial park for those who lost their lives that day. The sites where the original buildings stood are now reflecting pools with cascading waterfalls. A memorial museum contains items from the old towers.</p>
+
+                        <p>Nearby, a new 104-story tower has been constructed. Nicknamed the Freedom Tower, the structure rises an astonishing 1,776 feet (541 m). The building's height symbolizes the year of the United States' independence<span data-quiz="symbolizes" class="vocab-star unearned">⭐</span>. The glass-paneled tower has a twisted octagon shape, and its huge reflective surface mirrors the changes in light all around it. At the top is a spire equipped with a light beam that is visible for miles.</p>
+
+                        <p>Several other high-rises are being constructed at the site as well. By the year 2020, the new World Trade Center complex should be complete. New York's ever-changing skyline will reflect the spirit of a city that continues to adapt and grow<span data-quiz="adapt" class="vocab-star unearned">⭐</span>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notes-panel">
+                <h3 style="color: #667eea; margin-bottom: 20px;">📝 Study Notes</h3>
+
+                <!-- Introduction Notes -->
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Iconic</div>
+                    <div class="note-content">
+                        Means very famous and everyone recognizes it as a symbol. Like the Eiffel Tower is iconic for Paris!
+                    </div>
+                </div>
+
+                <div class="note-card grammar-note">
+                    <div class="note-title">Grammar: Rhetorical Question</div>
+                    <div class="note-content">
+                        "What would Paris be without...?" - This is a rhetorical question. It doesn't need an answer! It's used to show something is very important.
+                    </div>
+                </div>
+
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Unique</div>
+                    <div class="note-content">
+                        Means one-of-a-kind, special, different from everything else. Your fingerprints are unique to you!
+                    </div>
+                </div>
+
+                <!-- Growing Notes -->
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Diverse</div>
+                    <div class="note-content">
+                        Means having many different types. A diverse population means people from many different countries and backgrounds.
+                    </div>
+                </div>
+
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Rapidly</div>
+                    <div class="note-content">
+                        Means very quickly, at a fast speed. The city grew rapidly = the city grew very fast!
+                    </div>
+                </div>
+
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Immigrated</div>
+                    <div class="note-content">
+                        Means came to live in a new country permanently. Remember: IMMIGRATE = IN to a country.
+                    </div>
+                </div>
+
+                <div class="note-card grammar-note">
+                    <div class="note-title">Grammar: Simile</div>
+                    <div class="note-content">
+                        "much like curtains from a rod" - This is a simile! It compares walls hanging from steel beams to curtains hanging from a rod. Uses "like" or "as".
+                    </div>
+                </div>
+
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Skeleton</div>
+                    <div class="note-content">
+                        Here means the framework that supports the building, like bones support your body!
+                    </div>
+                </div>
+
+                <!-- Empire Notes -->
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Reign</div>
+                    <div class="note-content">
+                        Means the period when someone or something is the champion or in power. Like a king's reign!
+                    </div>
+                </div>
+
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Broke Ground</div>
+                    <div class="note-content">
+                        A phrase meaning to start construction. Workers break the ground to begin building!
+                    </div>
+                </div>
+
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Panoramic</div>
+                    <div class="note-content">
+                        Means a complete, wide view in all directions. From the top, you can see everything around you!
+                    </div>
+                </div>
+
+                <!-- Twins Notes -->
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Perimeter</div>
+                    <div class="note-content">
+                        Means the outer edge or boundary. The perimeter of the building = the outside edge of the building.
+                    </div>
+                </div>
+
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Dwarfed</div>
+                    <div class="note-content">
+                        Means made something look very small by comparison. The tall towers dwarfed the small buildings!
+                    </div>
+                </div>
+
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Prominent</div>
+                    <div class="note-content">
+                        Means easily seen, standing out, or very important. The most prominent building is the one everyone notices!
+                    </div>
+                </div>
+
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Stunned</div>
+                    <div class="note-content">
+                        Means shocked, very surprised, often unable to react. Like when you see something unbelievable!
+                    </div>
+                </div>
+
+                <!-- New Tower Notes -->
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Landmark</div>
+                    <div class="note-content">
+                        An important or famous building or place that everyone knows. The Statue of Liberty is a landmark!
+                    </div>
+                </div>
+
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Symbolizes</div>
+                    <div class="note-content">
+                        Means represents or stands for something else. The height of 1,776 feet symbolizes the year 1776!
+                    </div>
+                </div>
+
+                <div class="note-card grammar-note">
+                    <div class="note-title">Grammar: "The + comparative, the + comparative"</div>
+                    <div class="note-content">
+                        "The taller a building is, the more elevators it needs" - This pattern shows that as one thing increases, another increases too!
+                    </div>
+                </div>
+
+                <div class="note-card vocab-note">
+                    <div class="note-title">⭐ Adapt</div>
+                    <div class="note-content">
+                        Means to change or adjust to new conditions. New York adapts and grows, no matter what happens!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Popup -->
+    <div class="quiz-overlay" id="quizOverlay"></div>
+    <div class="quiz-popup" id="quizPopup">
+        <span class="quiz-close" id="quizClose">&times;</span>
+        <div class="quiz-question" id="quizQuestion"></div>
+        <div class="quiz-context" id="quizContext"></div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+    </div>
+
+    <script>
+        // Quiz data
+        const quizzes = {
+            "iconic": {
+                question: '"Iconic" is closest in meaning to:',
+                context: '"Iconic structures such as these..."',
+                options: ["famous and recognizable", "old and historical", "tall and impressive", "beautiful and colorful"],
+                correct: 0,
+                explanation: "Iconic means very famous and everyone recognizes it as a symbol!"
+            },
+            "unique": {
+                question: '"Unique" is closest in meaning to:',
+                context: '"Skylines are unique identifiers of places..."',
+                options: ["similar and common", "one-of-a-kind, special", "large and visible", "changing and dynamic"],
+                correct: 1,
+                explanation: "Unique means being the only one of its kind!"
+            },
+            "diverse": {
+                question: '"Diverse" is closest in meaning to:',
+                context: '"...along with its diverse population..."',
+                options: ["small and limited", "varied, many different kinds", "similar and alike", "rich and wealthy"],
+                correct: 1,
+                explanation: "Diverse means having many different types!"
+            },
+            "rapidly": {
+                question: '"Rapidly" is closest in meaning to:',
+                context: '"...began to grow rapidly."',
+                options: ["slowly", "quickly, fast", "steadily", "carefully"],
+                correct: 1,
+                explanation: "Rapidly means very quickly!"
+            },
+            "immigrated": {
+                question: '"Immigrated" is closest in meaning to:',
+                context: '"...Europeans immigrated to the United States..."',
+                options: ["left their country", "came to live in a new country", "traveled for vacation", "moved to a new city"],
+                correct: 1,
+                explanation: "Immigrated means came to a new country to live permanently!"
+            },
+            "skeleton": {
+                question: '"Skeleton" is closest in meaning to:',
+                context: '"...to form the building\'s skeleton."',
+                options: ["outer walls", "framework, supporting structure", "roof", "foundation"],
+                correct: 1,
+                explanation: "Skeleton means the framework that supports the building!"
+            },
+            "reign": {
+                question: '"Reign" is closest in meaning to:',
+                context: '"The Chrysler Building\'s reign would not last."',
+                options: ["construction", "period of being the champion", "design", "height"],
+                correct: 1,
+                explanation: "Reign means the period when something is the champion!"
+            },
+            "broke ground": {
+                question: '"Broke ground" is closest in meaning to:',
+                context: '"Workers broke ground on the Empire State Building..."',
+                options: ["finished building", "started construction", "destroyed", "designed"],
+                correct: 1,
+                explanation: "Broke ground means to start construction!"
+            },
+            "panoramic": {
+                question: '"Panoramic" is closest in meaning to:',
+                context: '"...provided panoramic views of the city."',
+                options: ["narrow", "limited", "complete, wide-ranging in all directions", "close-up"],
+                correct: 2,
+                explanation: "Panoramic means a complete view in all directions!"
+            },
+            "perimeter": {
+                question: '"Perimeter" is closest in meaning to:',
+                context: '"The outside perimeter of the building..."',
+                options: ["center", "inside", "outer edge, boundary", "top"],
+                correct: 2,
+                explanation: "Perimeter means the outer edge or boundary!"
+            },
+            "dwarfed": {
+                question: '"Dwarfed" is closest in meaning to:',
+                context: '"They dwarfed the surrounding buildings..."',
+                options: ["destroyed", "made to seem very small", "painted", "surrounded"],
+                correct: 1,
+                explanation: "Dwarfed means made something look very small by comparison!"
+            },
+            "prominent": {
+                question: '"Prominent" is closest in meaning to:',
+                context: '"...the most prominent structures..."',
+                options: ["hidden", "small", "easily seen, important", "old"],
+                correct: 2,
+                explanation: "Prominent means easily seen or very important!"
+            },
+            "stunned": {
+                question: '"Stunned" is closest in meaning to:',
+                context: '"New Yorkers watched in stunned disbelief..."',
+                options: ["happy", "shocked, very surprised", "bored", "excited"],
+                correct: 1,
+                explanation: "Stunned means shocked or very surprised!"
+            },
+            "landmark": {
+                question: '"Landmark" is closest in meaning to:',
+                context: '"...their neighbors and their landmark."',
+                options: ["new building", "important, famous place", "small house", "park"],
+                correct: 1,
+                explanation: "Landmark means an important or famous place!"
+            },
+            "symbolizes": {
+                question: '"Symbolizes" is closest in meaning to:',
+                context: '"The building\'s height symbolizes the year..."',
+                options: ["measures", "hides", "represents, stands for", "changes"],
+                correct: 2,
+                explanation: "Symbolizes means represents or stands for something!"
+            },
+            "adapt": {
+                question: '"Adapt" is closest in meaning to:',
+                context: '"...a city that continues to adapt and grow."',
+                options: ["stay the same", "stop", "adjust, change to fit new conditions", "shrink"],
+                correct: 2,
+                explanation: "Adapt means to change or adjust to new conditions!"
+            }
+        };
+
+        let currentQuiz = null;
+        let stars = JSON.parse(localStorage.getItem('stars') || '{}');
+        let starCount = Object.values(stars).filter(v => v).length;
+
+        // Update star display
+        function updateStarDisplay() {
+            document.getElementById('starCount').textContent = starCount;
+            document.querySelectorAll('.vocab-star').forEach(star => {
+                const quizId = star.getAttribute('data-quiz');
+                if (stars[quizId]) {
+                    star.classList.remove('unearned');
+                    star.classList.add('earned');
+                }
+            });
+        }
+
+        // Open quiz
+        function openQuiz(quizId) {
+            const quiz = quizzes[quizId];
+            if (!quiz) return;
+
+            currentQuiz = quizId;
+            document.getElementById('quizQuestion').textContent = quiz.question;
+            document.getElementById('quizContext').textContent = quiz.context;
+            document.getElementById('quizFeedback').className = 'quiz-feedback';
+            document.getElementById('quizFeedback').textContent = '';
+
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+            quiz.options.forEach((option, index) => {
+                const div = document.createElement('div');
+                div.className = 'quiz-option';
+                div.textContent = option;
+                div.onclick = () => checkAnswer(index);
+                optionsContainer.appendChild(div);
+            });
+
+            document.getElementById('quizPopup').classList.add('active');
+            document.getElementById('quizOverlay').classList.add('active');
+        }
+
+        // Check answer
+        function checkAnswer(selectedIndex) {
+            const quiz = quizzes[currentQuiz];
+            const options = document.querySelectorAll('.quiz-option');
+            const feedback = document.getElementById('quizFeedback');
+
+            options.forEach((opt, idx) => {
+                opt.onclick = null;
+                if (idx === quiz.correct) {
+                    opt.classList.add('correct');
+                } else if (idx === selectedIndex && selectedIndex !== quiz.correct) {
+                    opt.classList.add('incorrect');
+                }
+            });
+
+            if (selectedIndex === quiz.correct) {
+                feedback.className = 'quiz-feedback correct';
+                feedback.textContent = '✓ Correct! ' + quiz.explanation;
+                if (!stars[currentQuiz]) {
+                    stars[currentQuiz] = true;
+                    starCount++;
+                    localStorage.setItem('stars', JSON.stringify(stars));
+                    updateStarDisplay();
+                }
+            } else {
+                feedback.className = 'quiz-feedback incorrect';
+                feedback.textContent = '✗ Try again next time! ' + quiz.explanation;
+            }
+
+            setTimeout(() => {
+                closeQuiz();
+            }, 3000);
+        }
+
+        // Close quiz
+        function closeQuiz() {
+            document.getElementById('quizPopup').classList.remove('active');
+            document.getElementById('quizOverlay').classList.remove('active');
+            currentQuiz = null;
+        }
+
+        // Event listeners
+        document.querySelectorAll('.vocab-star').forEach(star => {
+            star.addEventListener('click', function() {
+                openQuiz(this.getAttribute('data-quiz'));
+            });
+        });
+
+        document.getElementById('quizClose').addEventListener('click', closeQuiz);
+        document.getElementById('quizOverlay').addEventListener('click', closeQuiz);
+
+        // Initialize
+        updateStarDisplay();
+
+        // Smooth scroll for TOC
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>

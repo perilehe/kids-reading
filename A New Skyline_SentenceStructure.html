@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A New Skyline - Sentence Structure & Vocabulary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .header .level-badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            border-bottom: 3px solid #e9ecef;
+        }
+
+        .toc h2 {
+            color: #2a5298;
+            margin-bottom: 20px;
+        }
+
+        .toc ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .toc li {
+            padding: 12px 20px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .toc a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .section {
+            padding: 40px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2a5298;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .sentence-block {
+            background: #f8f9fa;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .original-sentence {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .structure-analysis {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .sentence-core {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .sentence-core h4 {
+            color: #1565c0;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .core-elements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .element {
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        .subject {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+
+        .verb {
+            background: #ffcdd2;
+            color: #c62828;
+        }
+
+        .object {
+            background: #fff9c4;
+            color: #f57f17;
+        }
+
+        .modifier {
+            background: #e1bee7;
+            color: #6a1b9a;
+        }
+
+        .vocabulary-quiz {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ff9800;
+        }
+
+        .vocabulary-quiz h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+
+        .word-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 2px solid #ffcc80;
+        }
+
+        .word-question {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .word-context {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .synonym-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .synonym-option {
+            padding: 10px 15px;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+
+        .synonym-option:hover {
+            background: #e3f2fd;
+            border-color: #2196f3;
+        }
+
+        .synonym-option.correct {
+            background: #c8e6c9;
+            border-color: #4caf50;
+            font-weight: bold;
+        }
+
+        .synonym-option.incorrect {
+            background: #ffcdd2;
+            border-color: #f44336;
+        }
+
+        .answer-reveal {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 5px;
+            color: #2e7d32;
+            font-size: 0.9em;
+        }
+
+        .legend {
+            background: #f3e5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .legend h3 {
+            color: #6a1b9a;
+            margin-bottom: 15px;
+        }
+
+        .legend-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .structure-analysis {
+                grid-template-columns: 1fr;
+            }
+
+            .synonym-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>A New Skyline</h1>
+            <div class="subtitle">Sentence Structure & Vocabulary Building</div>
+            <div class="level-badge">Level W</div>
+        </div>
+
+        <div class="toc">
+            <h2>Contents</h2>
+            <ul>
+                <li><a href="#intro">Introduction</a></li>
+                <li><a href="#growing">Growing the Big Apple</a></li>
+                <li><a href="#empire">Building an Empire</a></li>
+                <li><a href="#twins">Twin Giants Rise, Then Fall</a></li>
+                <li><a href="#newtower">A New Tower Rises from the Ashes</a></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="legend">
+                <h3>Color Guide</h3>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #c8e6c9;"></div>
+                        <span>Subject (Who/What)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ffcdd2;"></div>
+                        <span>Verb (Action)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #fff9c4;"></div>
+                        <span>Object (Receiver)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #e1bee7;"></div>
+                        <span>Modifier (Describes)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Introduction -->
+        <div class="section" id="intro">
+            <h2 class="section-title">Introduction</h2>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span class="modifier">Iconic</span> <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">structures</span> <span class="modifier">such as these</span>, <span class="modifier">along with surrounding buildings</span>, <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">create</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">an outline</span> <span class="modifier">against the sky</span>, <span class="modifier">called a skyline</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>structures</strong> (subject) + <strong>create</strong> (verb) + <strong>an outline</strong> (object)</p>
+                        <div class="core-elements">
+                            <span class="element subject">structures</span>
+                            <span class="element verb">create</span>
+                            <span class="element object">an outline</span>
+                        </div>
+                        <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
+                            Everything else just adds more information!
+                        </p>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">1. "Iconic" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"Iconic structures such as these..."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">famous and recognizable</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">old and historical</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">tall and impressive</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">beautiful and colorful</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Iconic" means something is very famous and everyone recognizes it as a symbol!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">Skylines</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">are</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">unique identifiers</span> <span class="modifier">of places</span>, <span class="modifier">just as your fingerprints are one-of-a-kind identifiers of you</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>Skylines</strong> (subject) + <strong>are</strong> (verb) + <strong>identifiers</strong> (object/complement)</p>
+                        <div class="core-elements">
+                            <span class="element subject">Skylines</span>
+                            <span class="element verb">are</span>
+                            <span class="element object">identifiers</span>
+                        </div>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">2. "Unique" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"Skylines are unique identifiers of places..."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">similar and common</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">one-of-a-kind, special</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">large and visible</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">changing and dynamic</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Unique" means being the only one of its kind, special and different from everything else!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span class="modifier">Unlike fingerprints</span>, <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">skylines</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">don't stay</span> <span class="modifier">the same forever</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>skylines</strong> (subject) + <strong>don't stay</strong> (verb) + <strong>the same</strong> (complement)</p>
+                        <div class="core-elements">
+                            <span class="element subject">skylines</span>
+                            <span class="element verb">don't stay</span>
+                            <span class="element object">the same</span>
+                        </div>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">3. "Unlike" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"Unlike fingerprints, skylines don't stay the same..."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">similar to</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">exactly like</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">different from</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">better than</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Unlike" means different from or not like something else!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Growing the Big Apple -->
+        <div class="section" id="growing">
+            <h2 class="section-title">Growing the Big Apple</h2>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span class="modifier">During the nineteenth century</span>, <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">New York City's famous skyline</span>, <span class="modifier">along with its diverse population</span>, <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">began to grow</span> <span class="modifier">rapidly</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>skyline</strong> (subject) + <strong>began to grow</strong> (verb)</p>
+                        <div class="core-elements">
+                            <span class="element subject">skyline</span>
+                            <span class="element verb">began to grow</span>
+                        </div>
+                        <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
+                            "along with its diverse population" is extra information!
+                        </p>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">4. "Diverse" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"...along with its diverse population..."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">small and limited</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">varied, many different kinds</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">similar and alike</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">rich and wealthy</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Diverse" means having many different types or varieties!
+                            </div>
+                        </div>
+
+                        <div class="word-item">
+                            <div class="word-question">5. "Rapidly" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"...began to grow rapidly."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">slowly</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">quickly, fast</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">steadily</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">carefully</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Rapidly" means very quickly or at a fast speed!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">Many of them</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">stayed</span> <span class="modifier">on New York's Manhattan Island</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>Many of them</strong> (subject) + <strong>stayed</strong> (verb)</p>
+                        <div class="core-elements">
+                            <span class="element subject">Many of them</span>
+                            <span class="element verb">stayed</span>
+                        </div>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">6. "Immigrated" (from earlier context) is closest in meaning to:</div>
+                            <div class="word-context">"Later, waves of Europeans immigrated to the United States..."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">left their country</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">came to live in a new country</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">traveled for vacation</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">moved to a new city</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Immigrated" means to come to a new country to live there permanently!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">Gigantic steel beams</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">were connected</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">to form the building's skeleton</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>beams</strong> (subject) + <strong>were connected</strong> (verb)</p>
+                        <div class="core-elements">
+                            <span class="element subject">beams</span>
+                            <span class="element verb">were connected</span>
+                        </div>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">7. "Gigantic" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"Gigantic steel beams were connected..."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">tiny</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">medium-sized</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">huge, extremely large</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">heavy</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Gigantic" means extremely large or enormous!
+                            </div>
+                        </div>
+
+                        <div class="word-item">
+                            <div class="word-question">8. "Skeleton" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"...to form the building's skeleton."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">outer walls</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">framework, supporting structure</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">roof</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">foundation</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Skeleton" here means the basic framework that supports the whole building, like bones in a body!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Building an Empire -->
+        <div class="section" id="empire">
+            <h2 class="section-title">Building an Empire</h2>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">The Chrysler Building's reign</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">would not last</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>reign</strong> (subject) + <strong>would not last</strong> (verb)</p>
+                        <div class="core-elements">
+                            <span class="element subject">reign</span>
+                            <span class="element verb">would not last</span>
+                        </div>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">9. "Reign" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"The Chrysler Building's reign would not last."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">construction</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">period of being the champion</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">design</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">height</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Reign" means the period when someone or something is in power or is the champion!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">Workers</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">broke ground</span> <span class="modifier">on the Empire State Building</span> <span class="modifier">in January 1930</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>Workers</strong> (subject) + <strong>broke ground</strong> (verb phrase)</p>
+                        <div class="core-elements">
+                            <span class="element subject">Workers</span>
+                            <span class="element verb">broke ground</span>
+                        </div>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">10. "Broke ground" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"Workers broke ground on the Empire State Building..."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">finished building</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">started construction</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">destroyed</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">designed</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Broke ground" is a phrase that means to start building or begin construction!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">An outside observation deck</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">provided</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">panoramic views</span> <span class="modifier">of the city</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>deck</strong> (subject) + <strong>provided</strong> (verb) + <strong>views</strong> (object)</p>
+                        <div class="core-elements">
+                            <span class="element subject">deck</span>
+                            <span class="element verb">provided</span>
+                            <span class="element object">views</span>
+                        </div>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">11. "Panoramic" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"...provided panoramic views of the city."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">narrow</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">limited</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">complete, wide-ranging in all directions</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">close-up</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Panoramic" means a complete, wide view that you can see in all directions!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Twin Giants Rise, Then Fall -->
+        <div class="section" id="twins">
+            <h2 class="section-title">Twin Giants Rise, Then Fall</h2>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">The outside perimeter</span> <span class="modifier">of the building</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">had</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">columns</span> <span class="modifier">that were spaced close together</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>perimeter</strong> (subject) + <strong>had</strong> (verb) + <strong>columns</strong> (object)</p>
+                        <div class="core-elements">
+                            <span class="element subject">perimeter</span>
+                            <span class="element verb">had</span>
+                            <span class="element object">columns</span>
+                        </div>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">12. "Perimeter" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"The outside perimeter of the building..."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">center</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">inside</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">outer edge, boundary</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">top</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Perimeter" means the outer edge or boundary of something!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">They</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">dwarfed</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">the surrounding buildings</span> <span class="modifier">and were the most prominent structures</span> <span class="modifier">on Manhattan Island</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>They</strong> (subject) + <strong>dwarfed</strong> (verb) + <strong>buildings</strong> (object)</p>
+                        <div class="core-elements">
+                            <span class="element subject">They</span>
+                            <span class="element verb">dwarfed</span>
+                            <span class="element object">buildings</span>
+                        </div>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">13. "Dwarfed" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"They dwarfed the surrounding buildings..."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">destroyed</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">made to seem very small</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">painted</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">surrounded</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Dwarfed" means to make something seem very small by comparison!
+                            </div>
+                        </div>
+
+                        <div class="word-item">
+                            <div class="word-question">14. "Prominent" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"...the most prominent structures on Manhattan Island."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">hidden</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">small</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">easily seen, important, noticeable</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">old</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Prominent" means easily seen, standing out, or very important!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">New Yorkers</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">watched</span> <span class="modifier">in stunned disbelief</span> <span class="modifier">as these enormous structures were reduced to heaps of burning rubble</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>New Yorkers</strong> (subject) + <strong>watched</strong> (verb)</p>
+                        <div class="core-elements">
+                            <span class="element subject">New Yorkers</span>
+                            <span class="element verb">watched</span>
+                        </div>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">15. "Stunned" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"New Yorkers watched in stunned disbelief..."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">happy</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">shocked, very surprised</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">bored</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">excited</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Stunned" means shocked or very surprised, often unable to react!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: A New Tower Rises from the Ashes -->
+        <div class="section" id="newtower">
+            <h2 class="section-title">A New Tower Rises from the Ashes</h2>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">New Yorkers</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">mourned</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">the loss</span> <span class="modifier">of their neighbors and their landmark</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>New Yorkers</strong> (subject) + <strong>mourned</strong> (verb) + <strong>the loss</strong> (object)</p>
+                        <div class="core-elements">
+                            <span class="element subject">New Yorkers</span>
+                            <span class="element verb">mourned</span>
+                            <span class="element object">the loss</span>
+                        </div>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">16. "Mourned" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"New Yorkers mourned the loss..."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">celebrated</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">ignored</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">felt sad about, grieved for</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">forgot</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Mourned" means to feel and show deep sadness, especially after someone dies or something is lost!
+                            </div>
+                        </div>
+
+                        <div class="word-item">
+                            <div class="word-question">17. "Landmark" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"...the loss of their neighbors and their landmark."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">new building</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">important, famous place or building</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">small house</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">park</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Landmark" means an important or famous building or place that everyone knows!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">The building's height</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">symbolizes</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">the year</span> <span class="modifier">of the United States' independence</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>height</strong> (subject) + <strong>symbolizes</strong> (verb) + <strong>the year</strong> (object)</p>
+                        <div class="core-elements">
+                            <span class="element subject">height</span>
+                            <span class="element verb">symbolizes</span>
+                            <span class="element object">the year</span>
+                        </div>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">18. "Symbolizes" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"The building's height symbolizes the year..."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">measures</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">hides</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">represents, stands for</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">changes</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Symbolizes" means to represent or stand for something else!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sentence-block">
+                <div class="original-sentence">
+                    <span style="background: #c8e6c9; padding: 2px 6px; border-radius: 4px;">New York's ever-changing skyline</span> <span style="background: #ffcdd2; padding: 2px 6px; border-radius: 4px;">will reflect</span> <span style="background: #fff9c4; padding: 2px 6px; border-radius: 4px;">the spirit</span> <span class="modifier">of a city that continues to adapt and grow</span>.
+                </div>
+
+                <div class="structure-analysis">
+                    <div class="sentence-core">
+                        <h4>Sentence Core (主干)</h4>
+                        <p><strong>skyline</strong> (subject) + <strong>will reflect</strong> (verb) + <strong>the spirit</strong> (object)</p>
+                        <div class="core-elements">
+                            <span class="element subject">skyline</span>
+                            <span class="element verb">will reflect</span>
+                            <span class="element object">the spirit</span>
+                        </div>
+                    </div>
+
+                    <div class="vocabulary-quiz">
+                        <h4>Vocabulary Quiz</h4>
+
+                        <div class="word-item">
+                            <div class="word-question">19. "Reflect" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"New York's ever-changing skyline will reflect the spirit..."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">hide</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">create</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">show, express, represent</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">change</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Reflect" here means to show or express something, like a mirror shows an image!
+                            </div>
+                        </div>
+
+                        <div class="word-item">
+                            <div class="word-question">20. "Adapt" in this sentence is closest in meaning to:</div>
+                            <div class="word-context">"...a city that continues to adapt and grow."</div>
+                            <div class="synonym-options">
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">stay the same</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">stop</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, true)">adjust, change to fit new conditions</div>
+                                <div class="synonym-option" onclick="checkAnswer(this, false)">shrink</div>
+                            </div>
+                            <div class="answer-reveal">
+                                ✓ "Adapt" means to change or adjust to new conditions or situations!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswer(element, isCorrect) {
+            const wordItem = element.closest('.word-item');
+            const options = wordItem.querySelectorAll('.synonym-option');
+            const answerReveal = wordItem.querySelector('.answer-reveal');
+
+            // Remove previous selections
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+            });
+
+            // Mark the clicked option
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+                // Also show the correct answer
+                options.forEach(opt => {
+                    if (opt.onclick && opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+
+            // Show the answer explanation
+            answerReveal.style.display = 'block';
+
+            // Find and highlight the correct answer
+            if (!isCorrect) {
+                options.forEach(opt => {
+                    if (opt.getAttribute('onclick').includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+        }
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
